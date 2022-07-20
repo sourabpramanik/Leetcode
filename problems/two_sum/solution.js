@@ -3,20 +3,17 @@
  * @param {number} target
  * @return {number[]}
  */
-
-var arrNums = [2,7,11,15]
-var target = 9
 var twoSum = function(nums, target) {
-    const newArr = [];
-    for(let i = 0; i < nums.length; i++){
-        for(let j = i +1; j < nums.length; j++){
-            if(nums[i] + nums[j] == target){
-                newArr.push(i)
-                newArr.push(j)
-                return newArr;                
-            }        
-        }
+    let map = {};
+    let newArr = [];
+    for(let i=0; i<nums.length; i++){
+        let rem = target-nums[i];        
+        if(!map.hasOwnProperty(rem)){
+                map[nums[i]]=i;
+            } else {
+                newArr[0]=i;
+                newArr[1]=map[rem];
+            }
     }
+    return newArr;
 };
-
-twoSum(arrNums,target)
