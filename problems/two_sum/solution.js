@@ -5,15 +5,15 @@
  */
 var twoSum = function(nums, target) {
     let map = {};
-    let newArr = [];
+    let arr = [];
+    
     for(let i=0; i<nums.length; i++){
-        let rem = target-nums[i];        
-        if(!map.hasOwnProperty(rem)){
-                map[nums[i]]=i;
-            } else {
-                newArr[0]=i;
-                newArr[1]=map[rem];
-            }
+        let rem = target - nums[i];
+        if(!map[rem]){
+            map[nums[i]] = i+1;
+        } else{
+            arr.push(i, map[rem]-1)
+        }
     }
-    return newArr;
+    return arr
 };
