@@ -3,10 +3,15 @@
  * @param {number[]} indices
  * @return {string}
  */
-var restoreString = function(s, indices) {    
-    let map = {};
+var restoreString = function(s, indices) {   
+    
+    let str = s.split("");
+    
     for(let i=0; i<indices.length; i++){
-        map[indices[i]] = s[i];
+        
+        str[indices[i]] = s[i];
+        
     }
-    return Object.values(map).join("")
+    
+    return str.join("")
 };
