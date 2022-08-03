@@ -3,15 +3,10 @@
  * @return {number}
  */
 var balancedStringSplit = function(s) {
-    let l=0;
-    let r=0;
-    let count=0;
     
-    for(let i=0; i<s.length; i++){
-        if(s[i]==="L") l++
-        else r++
-        
-        if(r===l) count++
-    }
-    return count
+   return s.split("").reduce((f, c) => {
+      c==="L" ? f.count++ : f.count--;
+      f.count===0 && f.ans++
+       return f
+    }, {count: 0, ans: 0}).ans
 };
