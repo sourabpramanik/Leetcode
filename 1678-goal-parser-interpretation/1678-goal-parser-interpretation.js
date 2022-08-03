@@ -10,8 +10,10 @@ var interpret = function(command) {
         } else if(command[i]=="("){
             if(command[i+1]==")"){
                 str += "o";
+                i++
             } else{
                 str += "al"
+                i+3
             }
         }
     }
