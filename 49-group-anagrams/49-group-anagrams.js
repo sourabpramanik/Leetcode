@@ -3,17 +3,14 @@
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-    let map = new Map();
+    let map = {};
     let ans = []
     for(let str of strs){
         let sortedStr =  [...str].sort().join("")
-        if(!map.has(sortedStr)){
-            map.set(sortedStr, [])
+        if(!map[sortedStr]){
+            map[sortedStr] = []
         } 
-        map.get(sortedStr).push(str)
+        map[sortedStr].push(str)
     }
-    for(let [,values] of map){
-        ans.push(values)
-    }
-    return ans
+    return Object.values(map)
 };
