@@ -5,15 +5,13 @@
  */
 var countKDifference = function(nums, k) {
     let count=0;
+    let map=new Map();
     
     for(let i=0; i<nums.length; i++){
-        for(let j=0; j<nums.length; j++){
-            if(i<j){
-                if(Math.abs(nums[i]-nums[j])==k){
-                    count++;
-                }
-            }
-        }
+        let num = nums[i];
+        map.set(num, (map.get(num) ?? 0)+1)
+        count += (map.get(num-k) ?? 0) + (map.get(num+k) ?? 0)
     }
+
     return count
 };
