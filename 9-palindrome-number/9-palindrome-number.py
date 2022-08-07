@@ -1,5 +1,5 @@
 class Solution:
     def isPalindrome(self, x: int) -> bool:
-        s = str(x)
-        return s[::-1]==s
+      
+        return str(x)[::-1]==str(x)
         
