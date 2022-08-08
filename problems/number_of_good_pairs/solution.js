@@ -3,15 +3,13 @@
  * @return {number}
  */
 var numIdenticalPairs = function(nums) {
-    let map={}
-    let pairs=0;
-    for(let i=0; i<nums.length; i++){
-        if(map[nums[i]]){
-            pairs += map[nums[i]] 
-            map[nums[i]] ++
-        } else{
-            map[nums[i]] = 1;
-        }
+    let map = {}
+    let count=0
+    for(let num of nums){
+        if(map[num]!==undefined){
+            count+=map[num]
+        } 
+        map[num] = map[num]?map[num]+1:1
     }
-    return pairs
+    return count
 };
