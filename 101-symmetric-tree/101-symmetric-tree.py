@@ -7,7 +7,7 @@
 class Solution:
     def rec(self, p: Optional[TreeNode], q: Optional[TreeNode]):
         if (not p and not q):
-            return True
+            return (p==q)
         if(p and q and p.val==q.val):
             return self.rec(p.left,q.right) and self.rec(p.right,q.left)
         return False
