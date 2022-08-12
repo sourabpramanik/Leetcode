@@ -6,8 +6,7 @@
 #         self.right = right
 from collections import deque
 class Solution:
-    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-     
+     def verticalTraversal(self, root):
         g = collections.defaultdict(list) 
         queue = [(root,0)]
         while queue:
