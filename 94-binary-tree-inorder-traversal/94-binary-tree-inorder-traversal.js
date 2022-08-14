@@ -12,16 +12,28 @@
  */
 var inorderTraversal = function(root) {
     let arr = []
-    let stack = []
-    let current = root
-    while(current || stack.length>0){
-        while(current){
-            stack.push(current)
-            current = current.left
+    let curr = root
+    
+    while(curr!==null){
+        if(curr.left==null){
+            arr.push(curr.val)
+            curr = curr.right
         }
-        current = stack.pop()
-        arr.push(current.val)
-        current = current.right
+        else{
+            let prev = curr.left
+            while(prev.right && prev.right !== curr){
+                prev = prev.right
+            }
+            if(prev.right==null){
+                prev.right = curr
+                curr = curr.left
+            }
+            else{
+                prev.right=null
+                arr.push(curr.val)
+                curr = curr.right
+            }
+        }
     }
     
   
