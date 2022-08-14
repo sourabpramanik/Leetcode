@@ -10,15 +10,9 @@ class Solution:
         
         if root is None: return root
         
-        def recur(node):
-            if node is None: return None
-            newTree = TreeNode(node.val)
-            newTree.left = recur(node.right)
-            newTree.right = recur(node.left)
-            
-            return newTree
+        
+        root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)             
         
         
-        
-        return recur(root)
+        return root
         
