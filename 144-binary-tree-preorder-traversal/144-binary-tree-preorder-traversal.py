@@ -7,15 +7,25 @@
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
      
-        stk= [root]
         ans = []
-                
+        curr = root
         
-        while stk:
-            node = stk.pop()                      
-            if node: 
-                ans.append(node.val)  
-                stk.append(node.right)                
-                stk.append(node.left)
+        while curr is not None:
+            if curr.left is None:
+                ans.append(curr.val)
+                curr = curr.right
+            else:
+                temp = curr.left
                 
+                while temp.right and temp.right!=curr:
+                    temp = temp.right
+                    
+                if temp.right is None:
+                    temp.right = curr
+                    ans.append(curr.val)                    
+                    curr = curr.left
+                else:
+                    temp.right=None
+                    curr = curr.right
+        
         return ans
