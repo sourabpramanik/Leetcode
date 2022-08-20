@@ -8,18 +8,21 @@ class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         if not root: return None
         
-        res = []
-        stack = [(root, "")]
+        res = []       
         sum = 0
-        while stack:
-            node,ls = stack.pop()
+        
+        def rec(node, ls):
+            if node is None: return res
+            
             if not node.left and not node.right:
                 res.append(ls+str(node.val))
                 
             if node.right:
-                stack.append((node.right, ls+str(node.val)))
+                rec(node.right, ls+str(node.val))
             if node.left:
-                stack.append((node.left, ls+str(node.val)))
+                rec(node.left, ls+str(node.val))
+        
+        rec(root, "")
             
         for v in res:
             sum += int(v)
