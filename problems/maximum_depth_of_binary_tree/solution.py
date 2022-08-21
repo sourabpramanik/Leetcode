@@ -12,16 +12,14 @@ class Solution:
             return 0
         ls = deque([root])
         lev = 0
-        aux = 1
-        while len(ls)>0:
-            cur = ls.popleft()           
+     
+        while ls:
+            for i in range(len(ls)):
+                cur = ls.popleft()           
             
-            if(cur.left):
-                ls.append(cur.left) 
-            if(cur.right):
-                ls.append(cur.right) 
-            aux -= 1
-            if aux==0:
-                lev+=1
-                aux = len(ls)
+                if(cur.left):
+                    ls.append(cur.left) 
+                if(cur.right):
+                    ls.append(cur.right) 
+            lev+=1            
         return lev
