@@ -14,10 +14,9 @@ class Solution:
                 return res
             if not node.left and not node.right:
                 res.append(ls+str(node.val))
-            if node.left:
-                rec(node.left, ls+str(node.val)+"->")
-            if node.right:
-                rec(node.right, ls+str(node.val)+"->")
+            rec(node.left, ls+str(node.val)+"->")
+            rec(node.right, ls+str(node.val)+"->")
+                
         
         rec(root, "")
         
