@@ -3,15 +3,9 @@ class Solution:
         obj = dict()
         
         for v in nums:
-            if v in obj:
-                obj[v]+=1
-            else:
-                obj[v]=1
+            obj[v] = obj.get(v, 0) + 1
+            
+            if obj[v] > len(nums)//2:
+                return v
         
-        maxi = float("-inf")
-        key = 0
-        for v in obj:          
-            if maxi<obj[v]:
-                maxi=obj[v]
-                key=v
-        return key
+        
