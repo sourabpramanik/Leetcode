@@ -3,19 +3,23 @@
  * @return {number[][]}
  */
 var merge = function(intervals) {
-    let i=0;
-    intervals.sort((a,b) => a[0] - b[0])
-    while(i<intervals.length-1){
-        let block1 = intervals[i];
-        let block2 = intervals[i+1];
+    if(intervals.length<2){
+        return intervals
+    }
+    intervals.sort((a,b) => a[0]-b[0])
+    let ans=[]  
+    for(let i=0; i<intervals.length; i++){
+        let col=intervals[i]
         
-        if(block1[1]>=block2[0]){             
-            let start = block1[0]   
-            let end = Math.max(block1[1], block2[1])
-            intervals.splice(i, 2, [start,end])                              
-        } else{
-            i++            
+        if(ans.length==0 || ans[ans.length-1][1]<col[0]){
+            ans.push(col)
+        }
+        
+        else{     
+            
+            ans[ans.length-1][1]=Math.max(col[1], ans[ans.length-1][1])
         }
     }
-    return intervals
+    
+    return ans
 };
