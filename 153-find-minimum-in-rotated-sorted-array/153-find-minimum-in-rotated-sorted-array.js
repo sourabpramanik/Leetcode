@@ -19,7 +19,7 @@ var findMin = function(nums) {
             s=mid+1
         }else{
             res = Math.min(nums[mid],res)
-            e=mid            
+            e=mid-1        
         }
     }
     return res
