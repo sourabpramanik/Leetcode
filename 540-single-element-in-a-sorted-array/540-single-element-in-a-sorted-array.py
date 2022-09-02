@@ -5,10 +5,10 @@ class Solution:
         l, h=0, len(nums)-1
         
         while(l<h):
-            mid=(l+h)//2
+            mid=2 * ((l+h) // 4)
             
-            if(nums[mid]==nums[mid^1]):
-                l=mid+1
+            if(nums[mid]==nums[mid+1]):
+                l=mid+2
             else:
                 h=mid
         return nums[l]
