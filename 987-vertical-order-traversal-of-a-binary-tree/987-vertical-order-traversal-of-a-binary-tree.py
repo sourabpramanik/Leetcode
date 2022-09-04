@@ -6,17 +6,28 @@
 #         self.right = right
 from collections import deque
 class Solution:
-     def verticalTraversal(self, root):
-        g = collections.defaultdict(list) 
-        queue = [(root,0)]
-        while queue:
-            new = []
-            d = collections.defaultdict(list)
-            for node, s in queue:
-                d[s].append(node.val) 
-                if node.left:  new += (node.left, s-1), 
-                if node.right: new += (node.right,s+1),  
-            for i in d: g[i].extend(sorted(d[i]))
-            queue = new
-        return [g[i] for i in sorted(g)]
-                
+    def rec(self, X, Y, node, obj):
+        
+        if not node: return None
+        obj[X].append((Y, node.val))
+        
+        self.rec(X-1, Y+1, node.left, obj)
+        self.rec(X+1, Y+1, node.right, obj)
+        
+    def verticalTraversal(self, root):
+        
+        obj = defaultdict(list) 
+        self.rec(0,0,root,obj)
+        
+        res=[]
+        
+        for i in sorted(obj.keys()):
+            temp=[]            
+            for j in sorted(obj[i]):
+                temp.append(j[1])
+            res.append(temp)
+        
+        return res
+        
+            
+            
