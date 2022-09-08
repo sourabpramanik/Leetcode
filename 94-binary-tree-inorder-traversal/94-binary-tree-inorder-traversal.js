@@ -11,32 +11,29 @@
  * @return {number[]}
  */
 var inorderTraversal = function(root) {
-    let arr = []
+    let ans = []
     let curr = root
     
-    while(curr!==null){
-        if(curr.left==null){
-            arr.push(curr.val)
+    while(curr){
+        if(!curr.left){
+            ans.push(curr.val)
             curr = curr.right
-        }
-        else{
-            let prev = curr.left
-            while(prev.right && prev.right !== curr){
-                prev = prev.right
+        }else{
+            let temp = curr.left
+            while(temp.right && temp.right!==curr){
+                temp = temp.right
             }
-            if(prev.right==null){
-                prev.right = curr
+            if(temp.right===null){
+                temp.right=curr
                 curr = curr.left
-            }
-            else{
-                prev.right=null
-                arr.push(curr.val)
+            }else{
+                temp.right = null
+                ans.push(curr.val)
                 curr = curr.right
             }
         }
     }
     
-  
-    return arr
+    return ans
     
 };
