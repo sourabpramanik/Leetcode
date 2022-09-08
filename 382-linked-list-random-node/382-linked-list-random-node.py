@@ -6,15 +6,18 @@
 class Solution:
 
     def __init__(self, head: Optional[ListNode]):
-        self.arr = list()        
-        curr = head
-        
-        while(curr):
-            self.arr.append(curr.val)
-            curr = curr.next
-
+        self.head = head
+                
     def getRandom(self) -> int:
-        return random.choice(self.arr)
+        ans = 0
+        p, i = self.head, 0
+        
+        while p:
+            if random.randint(0, i)==0:
+                ans = p.val
+            p = p.next
+            i+=1
+        return ans
 
 
 # Your Solution object will be instantiated and called as such:
