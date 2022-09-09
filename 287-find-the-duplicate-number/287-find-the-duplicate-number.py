@@ -1,9 +1,18 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        obj = dict()
         
-        for v in nums:
-            if v not in obj:
-                obj[v] = 1
+        l, h= 1, len(nums)-1
+        
+        while(l<=h):
+            c = 0
+            m = (l+h)//2
+            for v in nums:
+                if(v<=m):
+                    c+=1
+            
+            if c<=m:
+                l=m+1
             else:
-                return v
+                h=m-1
+        
+        return l
