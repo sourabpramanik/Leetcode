@@ -8,18 +8,19 @@
 from collections import deque
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
-        ls = deque([root])
-        lev = 0
-     
-        while ls:
-            for i in range(len(ls)):
-                cur = ls.popleft()           
+        if not root: return 0
+        
+        self.large = float('-inf')
+        
+        def dfs(node, num):
+            if not node: return
             
-                if(cur.left):
-                    ls.append(cur.left) 
-                if(cur.right):
-                    ls.append(cur.right) 
-            lev+=1            
-        return lev
+            if not node.left and not node.right:
+                self.large = max(self.large, num)
+            
+            dfs(node.left, num+1)
+            dfs(node.right, num+1)
+        
+        dfs(root, 1)
+        
+        return self.large
