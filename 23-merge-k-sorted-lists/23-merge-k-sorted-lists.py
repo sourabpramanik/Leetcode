@@ -5,14 +5,19 @@
 #         self.next = next
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-       
-        interval=1
-        while interval<len(lists):
-            for i in range(0, len(lists)-interval, interval*2):
-                lists[i] = self.merger(lists[i], lists[i+interval])
-            interval*=2
+        return self.partition(lists, 0, len(lists)-1)
+    
+    def partition(self, arr, s, e):
+        if s==e:
+            return arr[s]
         
-        return lists[0] if len(lists) > 0 else None
+        if s<e:
+            q = (s+e)//2
+            L = self.partition(arr, s, q)            
+            R = self.partition(arr, q+1, e)
+            return self.merger(L, R)
+        else:
+            return None
         
     def merger(self, l1, l2):
         
