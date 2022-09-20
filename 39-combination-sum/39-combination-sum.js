@@ -6,23 +6,24 @@
 var combinationSum = function(candidates, target) {
     let ans = []
     let n = candidates.length
-    let ds = []
-    const rec = (i, t) => {
-        if(t==0){
-            ans.push(ds.slice())
+
+    const rec = (i, ds, t) => {
+        if(i==n){
+            if(t==0){
+                ans.push(ds.slice())
+            }
+            return
         }
-        if(i==n) return
-        if(t<=0) return
         
         if(candidates[i]<=t){
             ds.push(candidates[i])
-            rec(i, t-candidates[i])
+            rec(i, ds, t-candidates[i])
             ds.pop()
         }
-        rec(i+1, t)
+        rec(i+1, ds, t)
     }
     
-    rec(0, target)
+    rec(0, [], target)
     
     return ans
 };
