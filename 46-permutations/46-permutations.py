@@ -2,22 +2,16 @@ class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         ans = []
         n = len(nums)
-        def rec(ds, freq):
-            if len(ds)==n:
-                ans.append(ds[:])
+        def rec(i, arr):                 
+            if(i==n):
+                ans.append(arr[:])
                 return
             
-            for i in range(0, n):
-                if not freq[i]:
-                    freq[i] = True
-                    ds.append(nums[i])
-                    rec(ds, freq)
-                    ds.pop(len(ds)-1)
-                    freq[i] = False
-         
-        freq = {}
-        for i in range(0, n):
-            freq[i]=False
+            for j in range(i, n):
+                arr[i], arr[j] = arr[j], arr[i]
+                rec(i+1, arr)      
+                arr[i], arr[j] = arr[j], arr[i]
+                
         
-        rec([], freq)
+        rec(0, nums)
         return ans
