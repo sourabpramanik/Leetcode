@@ -4,19 +4,16 @@ class Solution:
         if len(a)==0:
             return False
         
-        n = len(a)
-        m = len(a[0])
-        s = 0
-        e = m*n-1
+        m = len(a)
+        n = len(a[0])
+        r = 0
+        c = n-1
         
-        while s<=e:
-            mid = (s+e)//2
-            
-            if(a[mid//m][mid%m]==target):
+        while r<m and c>=0:
+            if(a[r][c]==target):
                 return True
-            elif(a[mid//m][mid%m]>target):
-                e=mid-1
+            elif(a[r][c]>target):
+                c-=1
             else:
-                s=mid+1
-        
+                r+=1
         return False
