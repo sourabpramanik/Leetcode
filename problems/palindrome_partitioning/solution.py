@@ -1,25 +1,26 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res=[]
-        def isPal(s, l, r):
+        def isPal(val, l, r):            
+            
             while l<=r:
-                if(s[l]!=s[r]):
+                if val[l]!=val[r]:
                     return False
                 l+=1
                 r-=1
             return True
         
-        def rec(s, ind, path):
-            if ind==len(s):
-                res.append(path[:])
+        def rec(i, ds):
+            if i>=len(s):
+                res.append(ds[:])
                 return
             
-            for i in range(ind, len(s)):
-                if(isPal(s, ind, i)):
-                    path.append(s[ind:i+1])
-                    rec(s, i+1, path)
-                    path.pop(len(path)-1)
+            for j in range(i, len(s)):
+                if isPal(s, i, j):
+                    ds.append(s[i:j+1])
+                    rec(j+1, ds)
+                    ds.pop(len(ds)-1)
         
-        rec(s, 0, [])
-        
+        rec(0, [])
+            
         return res
