@@ -1,17 +1,8 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        ans = []
-        nums.sort()
+        output = [[]]
         
-        def rec(i, ds):
-            if i>=len(nums):
-                ans.append(ds[:])
-                return
-                        
-            ds.append(nums[i])
-            rec(i+1, ds)
-            ds.pop(len(ds)-1)
-            rec(i+1, ds)
+        for num in nums:
+            output += [curr + [num] for curr in output]
         
-        rec(0, [])
-        return ans
+        return output
