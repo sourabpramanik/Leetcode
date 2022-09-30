@@ -5,8 +5,8 @@ class Solution:
         def rec(i, ds, rem):
             if rem==0:
                 ans.append(ds[:])
+                return
             
-            if rem<=0: return
             if i>=len(A): return
             
             if rem>=A[i]:
