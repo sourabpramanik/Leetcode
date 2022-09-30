@@ -1,14 +1,29 @@
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         ans = []
+        seen = set()
         nums.sort()
-        def rec(i, ds):        
-            ans.append(ds[:])
-            for j in range(i, len(nums)):
-                if j>i and nums[j]==nums[j-1]:
-                    continue
-                ds.append(nums[j])
-                rec(j+1, ds)
-                ds.pop(len(ds)-1)
+        
+        def rec(i, ds):
+            if i>=len(nums):
+                ans.append(ds[:])
+                return
+            
+            ds.append(nums[i])
+            rec(i+1, ds)
+            ds.pop(len(ds)-1)
+            rec(i+1, ds)
+        
         rec(0, [])
-        return ans
+        
+        
+        def unq(arr):
+            
+            for item in arr:                
+                tup = tuple(item)
+                if tup not in seen:
+                    seen.add(tup)
+                    yield item
+        
+        return list(unq(ans))
+        
