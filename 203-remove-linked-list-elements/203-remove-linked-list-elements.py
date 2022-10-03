@@ -8,17 +8,18 @@ class Solution:
         dummy = ListNode(0, head)
         
         
-        def rec(curr):
-            if not curr.next:
+        def rec(prev, curr):
+            if not curr:
                 return None
             
-            if curr.next.val==val:
-                curr.next = curr.next.next
+            if curr.val==val:
+                prev.next = curr.next
             else:
-                curr = curr.next
-            rec(curr)
+                prev = curr
+            curr = curr.next
+            rec(prev, curr)
         
-        rec(dummy)
+        rec(dummy, head)
         
         return dummy.next
             
