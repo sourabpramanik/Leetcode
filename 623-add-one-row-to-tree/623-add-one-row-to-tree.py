@@ -6,30 +6,34 @@
 #         self.right = right
 class Solution:
     def addOneRow(self, root: Optional[TreeNode], val: int, depth: int) -> Optional[TreeNode]:
-        
         if depth==1:
             n = TreeNode(val)
             n.left = root
             return n
         
-        def rec(node, d, n):
-            
-            if not node:
-                return None
-            
-            if d==n-1:
-                temp = node.left
+        stack = []                
+        stack.append((root, 1))
+        
+        while len(stack)!=0:
+            tup = stack.pop()
+            node = tup[0]
+            n = tup[1]
+            if n==depth-1:
+                t = node.left
                 node.left = TreeNode(val)
-                node.left.left = temp
-                temp = node.right
-                node.right = TreeNode(val)
-                node.right.right = temp
-            
-            else:
-                rec(node.left, d+1, n)
-                rec(node.right, d+1, n)
+                node.left.left = t
                 
-        
-        rec(root, 1, depth)
+                t = node.right
+                node.right = TreeNode(val)
+                node.right.right = t
+                
+            else:
+                if node.left:
+                    stack.append((node.left, n+1))
+                    
+                if node.right:
+                    stack.append((node.right, n+1))
+                
+            
+            
         return root
-        
