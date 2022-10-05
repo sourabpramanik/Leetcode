@@ -11,29 +11,29 @@ class Solution:
             n.left = root
             return n
         
-        stack = []                
-        stack.append((root, 1))
-        
-        while len(stack)!=0:
-            tup = stack.pop()
-            node = tup[0]
-            n = tup[1]
-            if n==depth-1:
-                t = node.left
-                node.left = TreeNode(val)
-                node.left.left = t
+        queue = collections.deque([root])        
+        n=1
+        while n < depth-1:
+            temp = collections.deque()
+            while queue:
+                node = queue.popleft()
                 
-                t = node.right
-                node.right = TreeNode(val)
-                node.right.right = t
-                
-            else:
                 if node.left:
-                    stack.append((node.left, n+1))
-                    
+                    temp.append(node.left)
                 if node.right:
-                    stack.append((node.right, n+1))
-                
+                    temp.append(node.right)
             
+            queue = temp
+            n+=1
+        while queue:
+            node = queue.popleft()            
+            t = node.left
+            node.left = TreeNode(val)
+            node.left.left = t
+
+            t = node.right
+            node.right = TreeNode(val)
+            node.right.right = t         
+                
             
         return root
