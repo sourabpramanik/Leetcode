@@ -4,47 +4,31 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-class BstIterator:
-    def __init__(self, root, isRev):
-        self.root = root
-        self.rev = isRev
-        self.stack = list()
-        self.pushNode(root)
-    
-    def next(self):
-        node = self.stack.pop()
-        if self.rev:
-            self.pushNode(node.left)
-        else:
-            self.pushNode(node.right)
-        return node.val
-    
-    def pushNode(self, node):
-        while node:
-            self.stack.append(node)
-            if self.rev:
-                node = node.right
-            else: 
-                node = node.left
         
-    
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        if root is None: return False
+        self.arr = []
         
-        l = BstIterator(root, False)        
-        r = BstIterator(root, True)
+        self.preOrder(root, self.arr)
         
-        i = l.next()        
-        j = r.next()
+        obj={}
         
-        while(i<j):
-            if(i+j<k):
-                i = l.next()
-            elif(i+j>k):
-                j = r.next()
-            else:
+        for i in range(0, len(self.arr)):
+            rem = k-self.arr[i]
+            
+            if rem in obj:
                 return True
-        
+            else:
+                obj[self.arr[i]] = 1
         return False
+    
+    def preOrder(self, node, arr):
+        
+        if not node:
+            return None
+        
+        arr.append(node.val)
+        self.preOrder(node.left, arr)
+        self.preOrder(node.right, arr)
+    
+    
