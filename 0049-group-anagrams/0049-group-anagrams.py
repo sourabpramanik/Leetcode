@@ -8,9 +8,7 @@ class Solution:
                 enum[a].append(word)
             else:
                 enum[a] = [word]
-        ans = []
-        for v in enum:
-            ans.append(enum[v])
-        return ans
+        
+        return enum.values()
         
         
