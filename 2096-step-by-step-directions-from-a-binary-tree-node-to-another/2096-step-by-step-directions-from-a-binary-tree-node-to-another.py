@@ -7,36 +7,34 @@
 class Solution:
     def getDirections(self, root: Optional[TreeNode], sv: int, dv: int,) -> str:        
         
-        def lca(node):
-            if not node or node.val == sv or node.val == dv:                
-                return node
+        def dfs(node, target, ds):
+            if node is None:
+                return False
             
-            left = lca(node.left)
-            right = lca(node.right)
+            if node.val == target:
+                return True
             
-            if left and right:
-                return node
-            return left or right
-        
-        root = lca(root)
-        
-        start = dest = ""
-        
-        stack = [(root, "")]
-        
-        while stack:
-            
-            node, path = stack.pop()
-            
-            if node.val==sv: start = path
-            if node.val==dv: dest = path
-                
             if node.left:
-                stack.append((node.left, path+"L"))
+                if dfs(node.left, target, ds):
+                    ds.appendleft("L")
+                    return True
+            
             if node.right:
-                stack.append((node.right, path+"R"))
+                if dfs(node.right, target, ds):
+                    ds.appendleft("R")
+                    return True
+            
+        sq = collections.deque()
+        dq = collections.deque()
         
-        return "U"*len(start)+dest
+        dfs(root, sv, sq)
+        dfs(root, dv, dq)
+        
+        while sq and dq and sq[0] == dq[0]:
+            sq.popleft()
+            dq.popleft()
+        
+        return "U"*len(sq)+"".join(dq)
         
         
                 
