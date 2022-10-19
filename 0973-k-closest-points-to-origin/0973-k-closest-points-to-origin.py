@@ -1,21 +1,19 @@
-import math
+import heapq
 class Solution:
-    def kClosest(self, points: List[List[int]], t: int) -> List[List[int]]:
-        m=defaultdict(list)
-        for v in points:
-            k = self.getSqrt(v[0], v[1])
-            m[k].append(v)
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
         
-        print(m)
+        h=[]
+        
+        for p in points:
+            
+            if len(h)<=K-1:
+                heapq.heappush(h, (-p[0]**2-p[1]**2, p))
+            elif (-p[0]**2-p[1]**2) > h[0][0]:
+                heapq.heapreplace(h,(-p[0]**2-p[1]**2,p))
+        
         res = []
-        for k, v in sorted(m.items(), key=lambda x: x[0]):
-            for e in v:
-                res.append(e)
-                t-=1
-                if t==0:
-                    return res
+        while K:
+            res.append(heapq.heappop(h)[1])
+            K-=1
         
-        
-        
-    def getSqrt(self, x, y):
-        return math.sqrt((0-x)**2 + (0-y)**2)
+        return res
