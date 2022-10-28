@@ -1,8 +1,18 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        output = [[]]
+        ans = []
+        for i in range(0, (1<<len(nums))):
+            self.bitManp(nums, ans, i)
         
-        for num in nums:
-            output += [curr + [num] for curr in output]
+        return ans
+    def bitManp(self, nums, ans, i):
+        j=0
+        v = []
+        while i>0:
+            if(i&1==1):
+                v.append(nums[j])
+            j+=1
+            i=i>>1
         
-        return output
+        ans.append(v)
+        return
