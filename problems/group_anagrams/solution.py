@@ -1,14 +1,11 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        enum = {}
-        for word in strs:
-            a = "".join(sorted(word))
-            
-            if a in enum:
-                enum[a].append(word)
-            else:
-                enum[a] = [word]
+        d = defaultdict(list)
         
-        return enum.values()
+        for v in strs:
+            l = list(v)
+            l.sort()
+            l = "".join(l)
+            d[l].append(v)
         
-        
+        return d.values()
