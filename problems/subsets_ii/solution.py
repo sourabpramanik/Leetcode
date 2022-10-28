@@ -3,27 +3,24 @@ class Solution:
         ans = []
         seen = set()
         nums.sort()
+        for i in range(0, (1<<len(nums))):
+            self.bitMap(nums, seen, ans, i)
         
-        def rec(i, ds):
-            if i>=len(nums):
-                ans.append(ds[:])
-                return
+        return ans
+    
+    def bitMap(self, nums, seen, ans, i):
+        j=0
+        v=[]
+        
+        while i>0:
             
-            ds.append(nums[i])
-            rec(i+1, ds)
-            ds.pop(len(ds)-1)
-            rec(i+1, ds)
-        
-        rec(0, [])
-        
-        
-        def unq(arr):
-            
-            for item in arr:                
-                tup = tuple(item)
-                if tup not in seen:
-                    seen.add(tup)
-                    yield item
-        
-        return list(unq(ans))
+            if i&1:
+                v.append(nums[j])
+            j+=1
+            i = i>>1
+        tup = tuple(v)
+        if tup not in seen:
+            seen.add(tup)
+            ans.append(v)
+        return
         
