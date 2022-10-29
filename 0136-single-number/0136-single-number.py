@@ -1,7 +1,7 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        m = Counter(nums)
-        for k in m:
-            if m[k]==1:
-                return k
-        return -1
+        xor = 0
+        for v in nums:
+            xor ^= v
+        
+        return xor
