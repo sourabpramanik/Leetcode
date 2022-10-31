@@ -6,7 +6,8 @@ class Solution:
         for num in nums:
             XOR^=num
         
-        XOR ^= (1<<maximumBit) - 1
+        XOR ^= (2**maximumBit) - 1
+        # XOR ^= (1<<maximumBit) - 1
         ans[0] = XOR
         
         for i in range(1, n):
