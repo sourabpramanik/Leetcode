@@ -6,14 +6,10 @@ class Solution:
         for num in nums:
             XOR^=num
         
-        XOR ^= (2**maximumBit) - 1
-        # XOR ^= (1<<maximumBit) - 1
-        ans[0] = XOR
-        
-        for i in range(1, n):
-            XOR ^= nums[n-i]
-            ans[i] = XOR
-        
+        for i in range(0, n):
+            ans[i] = XOR ^ (1<<maximumBit) - 1
+            XOR ^= nums[n-i-1]
+            
         return ans
         
 #         BRUTE
