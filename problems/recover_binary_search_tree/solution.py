@@ -5,28 +5,29 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    prev, first, last = None, None, None
-    
-    def inOrder(self,node):
-        if node is None: return None
-        
-        self.inOrder(node.left)
-        
-        if(self.first is None and node.val < self.prev.val):
-            self.first = self.prev                
-        
-        if(self.first and node.val < self.prev.val):
-            self.last = node
-                
-        
-        self.prev = node
-        self.inOrder(node.right)
     def recoverTree(self, root: Optional[TreeNode]) -> None:
         
-        self.prev = TreeNode(float("-inf"))
-        self.inOrder(root)
         
-        t = self.first.val
-        self.first.val = self.last.val
-        self.last.val = t
+        stack = []
+        prev_node = TreeNode(float("-inf"))
+        first_node = None
+        last_node = None
+        
+        while root or stack:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                if len(stack):
+                    root = stack.pop()
+                    if not first_node and root.val < prev_node.val:
+                        first_node = prev_node
+                    
+                    if first_node and root.val  < prev_node.val:
+                        last_node = root
+                    
+                    prev_node = root
+                    root = root.right
+                
+        first_node.val, last_node.val = last_node.val, first_node.val
         
