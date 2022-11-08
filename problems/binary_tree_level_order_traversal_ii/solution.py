@@ -4,30 +4,23 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
-from collections import deque
 class Solution:
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-        
-        if root is None: return []
-        
-        queue = deque([root])
         ans = []
+        if not root:
+            return  ans
+        queue = collections.deque([root])
         
         while queue:
-            aux = []
-            size = len(queue)
-            
-            for v in range(size):
-                root = queue.popleft()
-                
-                aux.append(root.val)
-                
-                if(root.left):
-                    queue.append(root.left)
-                if(root.right):
-                    queue.append(root.right)
-            
-            ans.append(aux)
+            ds=[]
+            for _ in range(len(queue)):
+                node=queue.popleft() 
+                ds.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+                    
+            ans.append(ds)
         
         return ans[::-1]
