@@ -10,16 +10,16 @@ class Solution:
         if not root:
             return []
         res = []
-        queue = [(root, root.val, [root.val])]
+        stack = [(root, targetSum-root.val, [root.val])]
         
-        while queue:
-            node, val, ds = queue.pop(0)
-            if not node.left and not node.right and val == targetSum:
+        while stack:
+            node, target, ds = stack.pop()
+            if not node.left and not node.right and target==0:
                 res.append(ds)
             
             if node.left:
-                queue.append((node.left, val+node.left.val, ds+[node.left.val]))
+                stack.append((node.left, target-node.left.val, ds+[node.left.val]))
             if node.right:
-                queue.append((node.right, val+node.right.val, ds+[node.right.val]))
+                stack.append((node.right, target-node.right.val, ds+[node.right.val]))
             
         return res
