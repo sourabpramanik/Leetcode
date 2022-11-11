@@ -11,18 +11,20 @@ class Node:
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         
-        def dfs(node):
-            if not node:
-                return None
-            
-            if node.right:
-                node.left.next = node.right
-                if node.next:
-                    node.right.next = node.next.left
-            
-            dfs(node.left)
-            dfs(node.right)
+        if not root:
+            return root
+        queue = collections.deque([root])
         
-        dfs(root)
+        while queue:
+            prev = None
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if prev:
+                    prev.next = node
+                prev = node
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
         
         return root
