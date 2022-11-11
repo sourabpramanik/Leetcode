@@ -10,12 +10,13 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Node') -> 'Node':
-        if not root: return root
+        if not root:
+            return root
         queue = collections.deque([root])
         
         while queue:
-            prev=None
-            for v in range(len(queue)):                
+            prev = None
+            for _ in range(len(queue)):
                 node = queue.popleft()
                 if prev:
                     prev.next = node
