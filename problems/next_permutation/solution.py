@@ -3,27 +3,29 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        def swap(A, i, j):
-            t=A[i]
-            A[i]=A[j]
-            A[j]=t
+        n=len(nums)
         
-        def rev(A, i, j):
-            while(i<j):
-                swap(A, i, j)
-                i+=1
+        i=n-1
+        
+        while i>=0:
+            if i<n-1 and nums[i]<nums[i+1]:
+                break
+            i-=1
+        
+        if i>=0:
+            j=n-1
+            while j>=0:
+                if nums[j]>nums[i]:
+                    break
                 j-=1
-                
-        idx1=len(nums)-2
-        
-        
-        while(idx1>=0 and nums[idx1]>=nums[idx1+1]): idx1-=1
-        
-        if(idx1>=0):
-            idx2=len(nums)-1
-            while(nums[idx2]<=nums[idx1]):idx2-=1
+
+            nums[i], nums[j] = nums[j], nums[i]       
+        i+=1
+        j=n-1
+        while i<j:
+            nums[i], nums[j] = nums[j], nums[i] 
+            i+=1
+            j-=1
             
-            swap(nums, idx1, idx2)
         
-        rev(nums, idx1+1, len(nums)-1)
-                
+        
