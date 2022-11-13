@@ -1,16 +1,12 @@
 class Solution:
-    def generate(self, numRows: int) -> List[List[int]]:
-        res = list()        
-        pre = None
+    def generate(self, n: int) -> List[List[int]]:
+        v = [0]*n
         
-        for i in range(0, numRows):
-            row=[]
-            for j in range(0, i+1):
-                if j==0 or j==i:
-                    row.append(1)
-                else:
-                    row.append(pre[j-1]+pre[j])
-                
-            pre = row
-            res.append(row)
-        return res
+        for i in range(0, n):
+            v[i] = [0]*(i+1)
+            v[i][0]=1
+            v[i][-1]=1
+            for j in range(1, i):
+                v[i][j] = v[i-1][j-1] + v[i-1][j]
+        
+        return v
