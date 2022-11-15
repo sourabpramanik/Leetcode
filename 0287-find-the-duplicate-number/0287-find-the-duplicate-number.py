@@ -3,11 +3,14 @@ class Solution:
         s=nums[0]
         f=nums[0]
         
-        s = nums[s]
-        f = nums[nums[f]]
-        while s!=f:
+        
+        while True:
             s = nums[s]
             f = nums[nums[f]]
+            
+            if s==f:
+                break
+            
         
         f=nums[0]
         
