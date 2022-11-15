@@ -1,9 +1,18 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        nums.sort()
+        s=nums[0]
+        f=nums[0]
         
-        for i in range(1, len(nums)):
-            if nums[i]==nums[i-1]:
-                return nums[i]
+        s = nums[s]
+        f = nums[nums[f]]
+        while s!=f:
+            s = nums[s]
+            f = nums[nums[f]]
         
-        return -1
+        f=nums[0]
+        
+        while s!=f:
+            s = nums[s]
+            f = nums[f]
+        
+        return s
