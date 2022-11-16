@@ -1,16 +1,9 @@
 class Solution:
     def majorityElement(self, nums: List[int]) -> List[int]:
-        obj=dict()
-        res=[]
+        count=Counter(nums)
+        ans=[]
+        for k in count:
+            if count[k]>len(nums)/3:
+                ans.append(k)
         
-        for i, v in enumerate(nums):
-            if v in obj:
-                obj[v]+=1
-            else:
-                obj[v]=1
-        
-        for v in obj:
-            if(obj[v]>floor(len(nums)/3)):
-                res.append(v)
-        
-        return res
+        return ans
