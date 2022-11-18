@@ -4,14 +4,15 @@ class Solution:
         n=len(s)
         l=0
         r=0
-        ds=set()
+        ds={}
         while r<n:
-            while l<r and s[r] in ds:
-                ds.remove(s[l])
-                l+=1
+            if s[r] in ds:
+                l = max(l,ds[s[r]]+1)
+                
+            ds[s[r]] = r
             ans = max(ans, r-l+1)
-            ds.add(s[r])
             r+=1
+            
                 
         
         return ans
