@@ -2,11 +2,9 @@ class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
-        """
-        if m==0:
-            for i in range(0, n):
-                nums1[i]=nums2[i]
-        else:
+        """        
+        
+        if m!=0:
             gap = math.ceil((m+n)/2)
             p1=0
 
@@ -29,10 +27,10 @@ class Solution:
                     gap=0
                 else:
                     gap = math.ceil(gap/2)
-            k=m           
-            for num in nums2:
-                nums1[k]=num
-                k+=1
+        k=m    
+        for num in nums2:
+            nums1[k]=num
+            k+=1
             
         
         
