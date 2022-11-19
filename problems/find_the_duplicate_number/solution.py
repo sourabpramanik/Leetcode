@@ -1,21 +1,7 @@
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
-        s=nums[0]
-        f=nums[0]
-        
-        
-        while True:
-            s = nums[s]
-            f = nums[nums[f]]
-            
-            if s==f:
-                break
-            
-        
-        f=nums[0]
-        
-        while s!=f:
-            s = nums[s]
-            f = nums[f]
-        
-        return s
+        m = Counter(nums)
+        for k in m:
+            if m[k]>1:
+                return k
+        return -1
