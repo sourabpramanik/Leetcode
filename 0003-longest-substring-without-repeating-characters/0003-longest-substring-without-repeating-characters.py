@@ -6,15 +6,16 @@ class Solution:
         if n==0:
             return 0
         ans=0
-        ds = {}
+        ds = set()
         l=0
         r=0
         while r<n:
-            if l<r and s[r] in ds:                
-                l = max(l, ds[s[r]]+1)
+            while l<r and s[r] in ds:                
+                ds.remove(s[l])
+                l+=1
                 
             ans = max(ans, r-l+1)
-            ds[s[r]] = r
+            ds.add(s[r])
             r+=1
             
         
