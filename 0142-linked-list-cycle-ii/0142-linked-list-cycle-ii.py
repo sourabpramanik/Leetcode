@@ -9,16 +9,19 @@ class Solution:
         fast=head
         slow=head
         p=head
+        cycle=0
         while fast and fast.next:
             
             fast=fast.next.next
             slow=slow.next
             if fast==slow:
-                while slow!=p:
-                    p=p.next
-                    slow=slow.next
-                
-                return slow
-        return None
+                cycle=1
+                break
+        
+        if cycle==1:
+            while p!=slow:
+                p=p.next
+                slow=slow.next
+            return slow
         
         return None
