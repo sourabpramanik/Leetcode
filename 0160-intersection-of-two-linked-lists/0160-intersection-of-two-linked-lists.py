@@ -9,16 +9,15 @@ class Solution:
         a = headA
         b = headB
         
-        while a!=b:
-            if a==None:
-                a=headB
-            else:
-                a=a.next
-            
-            if b==None:
-                b=headA
-            else:
-                b=b.next
-            
+        ds={}
         
-        return a
+        while a:
+            ds[a]=1
+            a=a.next
+        
+        while b:
+            if b in ds:
+                return b
+            b=b.next
+        
+        return None
