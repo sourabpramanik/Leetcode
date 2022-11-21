@@ -4,18 +4,32 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    temp=None
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        self.temp = head
-        return self.rec(head)
+        fast=head
+        slow=head
         
-    def rec(self, head):
-        if not head:
-            return
-        self.rec(head.next)
+        while fast and fast.next:
+            fast=fast.next.next
+            slow=slow.next
+        slow = self.reverse(slow)
+        d=head
+        while slow:
+            if slow.val!= d.val:
+                return False
+            d=d.next
+            slow=slow.next
         
-        if(self.temp.val!=head.val):
-            return False
-        if(self.temp.next==None):
-            return True
-        self.temp = self.temp.next        
+        return True
+        
+    def reverse(self, node):
+        pre=None
+        curr=node
+        nex=None
+        
+        while curr:
+            nex=curr.next
+            curr.next=pre
+            pre=curr
+            curr=nex
+        
+        return pre
