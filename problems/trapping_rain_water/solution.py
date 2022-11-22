@@ -1,26 +1,20 @@
 class Solution:
-    def trap(self, bars):
-        if not bars or len(bars) < 3:
-            return 0
-        volume=0
-        l=0
-        r=len(bars)-1
-        lmax=bars[l]
-        rmax=bars[r]
+    def trap(self, height: List[int]) -> int:
+        ans=0
+        n=len(height)
+        prefix=[0]*n
+        suffix=[0]*n
         
-        while l<=r:
-            if bars[l]<=bars[r]:
-                if lmax<bars[l]:
-                    lmax=bars[l]
-                else:
-                    volume+=lmax-bars[l]
-                l+=1
-            else:
-                if rmax<bars[r]:
-                    rmax=bars[r]
-                else:
-                    volume+=rmax-bars[r]
-                r-=1
-                
-        return volume
+        prefix[0]=height[0]
+        suffix[n-1]=height[n-1]
         
+        for i in range(1, n):
+            prefix[i]=max(prefix[i-1], height[i])
+        
+        for i in range(n-2, -1, -1):
+            suffix[i]=max(suffix[i+1], height[i])
+       
+        for i in range(0, n):
+            ans += min(prefix[i], suffix[i])-height[i]
+        
+        return ans
