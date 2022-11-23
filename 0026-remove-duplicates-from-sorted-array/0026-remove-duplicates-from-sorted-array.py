@@ -1,15 +1,15 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        i=0
+        hs=set()
+        for i in range(0, len(nums)):
+            hs.add(nums[i])
+        
+        k=len(hs)
+        hs=sorted(hs)
         j=0
-        while j<len(nums):
-            while j+1<len(nums) and nums[j+1]==nums[j]:
-                j+=1
-            
-            nums[i]=nums[j]
-            i+=1
+        for val in hs:
+            nums[j]=val
             j+=1
-        
-        return i
-        
+            
+        return k
         
