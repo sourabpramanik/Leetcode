@@ -9,8 +9,7 @@ class Solution:
                 ans.append(ds[:])
                 return
             
-            if i>=n:
-                return
+           
             
             
             for j in range(i, n):
