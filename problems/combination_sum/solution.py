@@ -1,24 +1,20 @@
 class Solution:
-    def combinationSum(self, A, tar) -> List[List[int]]:
+    def combinationSum(self, arr: List[int], target: int) -> List[List[int]]:
+        ans=[]
         
-        ans = []
-        def rec(i, ds, rem):
-            if rem==0:
+        def find(i, ds, targetSum):
+            if i>=len(arr):
+                return
+            
+            if targetSum==0:
                 ans.append(ds[:])
                 return
             
-            if i>=len(A): return
-            
-            if rem>=A[i]:
-                ds.append(A[i])
-                rem-=A[i]
-                rec(i, ds, rem)
-                rem+=A[i]
+            if targetSum>=arr[i]:
+                ds.append(arr[i])
+                find(i, ds, targetSum-arr[i])
                 ds.pop(len(ds)-1)
-                
-            rec(i+1, ds, rem)
-            
+            find(i+1, ds, targetSum)
         
-        rec(0, [], tar)
-        
+        find(0, [], target)
         return ans
