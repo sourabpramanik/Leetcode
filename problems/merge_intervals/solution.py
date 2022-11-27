@@ -1,15 +1,13 @@
 class Solution:
-    def merge(self, mat: List[List[int]]) -> List[List[int]]:
-        mat.sort(key=lambda x:x[0])
-        n = len(mat)
-        ans = []
-        pair = mat[0]
-        
-        for i in range(0, n):
-            if pair[1]>=mat[i][0]:
-                pair[1] = max(pair[1], mat[i][1])
+    def merge(self, arr: List[List[int]]) -> List[List[int]]:
+        arr.sort(key=lambda x:x[0])
+        ans=[]
+        pair=arr[0]
+        for i in range(1, len(arr)):
+            if pair[1]>=arr[i][0]:
+                pair[1]=max(pair[1], arr[i][1])
             else:
                 ans.append(pair)
-                pair = mat[i]
+                pair=arr[i]
         ans.append(pair)
         return ans
