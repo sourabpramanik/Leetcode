@@ -1,15 +1,14 @@
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
-        ans = float("-inf")
-        n = len(nums)
-        currSum=0
+        n=len(nums)
+        ans=float("-inf")
+        curr=0
+        
         for i in range(0, n):
-            currSum += nums[i]            
-            ans = max(ans, currSum)
-            if currSum <0:
-                currSum = 0
+            curr+=nums[i]
+            ans=max(ans, curr)
+            if curr<0:
+                curr=0
                 
         
         return ans
-                
-        
