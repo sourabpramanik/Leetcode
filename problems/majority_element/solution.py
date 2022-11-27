@@ -5,8 +5,7 @@ class Solution:
         
         for i in range(0, len(nums)):
             if count==0:
-                element = nums[i]
-                
+                element=nums[i]
             if element==nums[i]:
                 count+=1
             else:
