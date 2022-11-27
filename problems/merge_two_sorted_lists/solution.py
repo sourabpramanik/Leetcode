@@ -10,26 +10,21 @@ class Solution:
         if not list2:
             return list1
         
-        l1 = list1
-        l2 = list2
         
-        if l1.val>l2.val:
-            l1, l2 = l2, l1
-        
-        res=l1
-        
-        while l1 and l2:
-            temp = None
+        p=list1
+        q=list2
+        if p.val>q.val:
+            p, q = q, p
             
-            while l1 and l1.val<=l2.val:
-                temp = l1
-                l1 = l1.next
+        res=p
+        
+        while p and q:
+            temp=None
+            while p and p.val<=q.val:
+                temp=p
+                p=p.next
             
-            temp.next = l2
-            l1, l2 = l2, l1
+            temp.next=q
+            p, q = q, p
         
         return res
-            
-    
-    def swap(self, l1, l2):
-        l1, l2 = l2, l1
