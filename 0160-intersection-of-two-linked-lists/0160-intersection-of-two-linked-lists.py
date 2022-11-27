@@ -6,18 +6,17 @@
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        a = headA
-        b = headB
+        p=headA
+        q=headB
         
-        ds={}
+        hashMap={}
+        while p:
+            hashMap[p]=1
+            p=p.next
         
-        while a:
-            ds[a]=1
-            a=a.next
-        
-        while b:
-            if b in ds:
-                return b
-            b=b.next
+        while q:
+            if q in hashMap:
+                return q
+            q=q.next
         
         return None
