@@ -3,16 +3,14 @@ class Solution:
         m=len(matrix)
         n=len(matrix[0])
         
-        for i in range(0, m):
-            l=0
-            r=n-1
-            while l<=r:
-                mid=(l+r)//2
-                if matrix[i][mid]==target:
-                    return True
-                elif matrix[i][mid]>target:
-                    r=mid-1
-                else:
-                    l=mid+1
+        i=0
+        j=n-1
+        while i<m and j>=0:
+            if matrix[i][j]==target:
+                return True
+            elif matrix[i][j]>target:
+                j-=1
+            else:
+                i+=1
         return False
                 
