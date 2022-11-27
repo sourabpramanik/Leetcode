@@ -9,27 +9,32 @@ class Solution:
         slow=head
         
         while fast and fast.next:
+            slow=slow.next
             fast=fast.next.next
-            slow=slow.next
-        slow = self.reverse(slow)
-        d=head
+        
+        slow=self.reverse(slow)
+        
+        p=head
+        
         while slow:
-            if slow.val!= d.val:
+            if p.val!=slow.val:
                 return False
-            d=d.next
             slow=slow.next
+            p=p.next
         
         return True
-        
+    
     def reverse(self, node):
+        
         pre=None
-        curr=node
+        cur=node
         nex=None
         
-        while curr:
-            nex=curr.next
-            curr.next=pre
-            pre=curr
-            curr=nex
+        while cur:
+            nex=cur.next
+            cur.next=pre
+            pre=cur
+            cur=nex
         
         return pre
+        
