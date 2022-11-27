@@ -2,8 +2,7 @@ class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
-        """        
-        
+        """
         if m!=0:
             gap = math.ceil((m+n)/2)
             p1=0
@@ -35,7 +34,3 @@ class Solution:
         for num in nums2:
             nums1[m]=num
             m+=1
-            
-        
-        
-        
