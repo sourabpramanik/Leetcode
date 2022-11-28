@@ -1,47 +1,47 @@
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
-        ans = []
-        board = []
-        s = ""
-        leftRow = []
-        upDia = []
-        lowDia = []
-        for i in range(n):
-            s +="."
+        ans=[]
+        grid=["."*n]*n        
+        
+        def rec(j, grid):
+            if j==n:
+               
+                ans.append(grid[:])
+                return 
             
-        for i in range(n):
-            board.append(s)
+            for i in range(n):
+                if self.safe(i, j, grid):                   
+                    grid[i]=grid[i][:j]+"Q"+grid[i][j+1:]                    
+                    rec(j+1, grid)                    
+                    grid[i]=grid[i][:j]+"."+grid[i][j+1:]
+        rec(0, grid)
         
-        for i in range(n):
-            leftRow.append(0)
-            
-        for i in range(2*n):
-            upDia.append(0)
+        return ans      
+    
+    def safe(self, row, col, grid):
+        i=row
+        j=col
         
-        for i in range(2*n):
-            lowDia.append(0)
-        
-        
-        def rec(col, board):
-            if col==n:
-                ans.append(board[:])
-                return
-            
-            for row in range(n):
-                if(leftRow[row]==0 and lowDia[col+row]==0 and upDia[n-1+col-row]==0):
-                    leftRow[row]=1
-                    lowDia[col+row]=1 
-                    upDia[n-1+col-row]=1
-                    board[row] = board[row][:col] + "Q" + board[row][col+1:]
-                                      
-                    rec(col+1, board)
-                    
-                    leftRow[row]=0
-                    lowDia[col+row]=0 
-                    upDia[n-1+col-row]=0                    
-                    board[row] = board[row][:col] + "." + board[row][col+1:]
+        while i>=0 and j>=0:
+            if grid[i][j]=="Q":
+                return False
+            i-=1
+            j-=1
         
         
-        rec(0, board)
+        j=col
         
-        return ans
+        while j>=0:
+            if grid[row][j]=="Q":
+                return False            
+            j-=1
+        
+        i=row
+        j=col
+        while i<len(grid) and j>=0:
+            if grid[i][j]=="Q":
+                return False
+            i+=1
+            j-=1
+        
+        return True
