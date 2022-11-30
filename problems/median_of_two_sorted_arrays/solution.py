@@ -1,37 +1,32 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        if len(nums1)>len(nums2):
+            return self.findMedianSortedArrays(nums2, nums1)
         
-        arr = self.merge(nums1, nums2)
-        n = len(arr)
+        n1=len(nums1)        
+        n2=len(nums2)
         
-        if n%2==0:
-            m=n//2
-            p=arr[m]
-            q=arr[m-1]
-            return (p+q)/2
-        else:
-            m=n//2
-            return arr[m]
-    
-    def merge(self, A, B):
-        c1=0
-        c2=0
-        arr=[]
+        low=0
+        high=n1
         
-        while c1<len(A) and c2<len(B):
-            if A[c1]<=B[c2]:
-                arr.append(A[c1])
-                c1+=1
-            else:
-                arr.append(B[c2])
-                c2+=1
-        
-        while c1<len(A):
-            arr.append(A[c1])
-            c1+=1
-        
-        while c2<len(B):
-            arr.append(B[c2])
-            c2+=1
+        while low<=high:
+            cut1=(low+high)//2
+            cut2=(n1+n2+1)//2-cut1
             
-        return arr
+            l1=float("-inf") if cut1==0 else nums1[cut1-1]            
+            l2=float("-inf") if cut2==0 else nums2[cut2-1]
+            
+            r1=float("inf") if cut1==n1 else nums1[cut1]            
+            r2=float("inf") if cut2==n2 else nums2[cut2]
+            
+            if l1<=r2 and l2<=r1:
+                if (n1+n2)%2==1:
+                    return max(l1, l2)
+                else:
+                    return (max(l1, l2)+min(r1, r2))/2
+            elif l1>r2:
+                high=cut1-1
+            else:
+                low=cut1+1
+        
+        return 0.0
