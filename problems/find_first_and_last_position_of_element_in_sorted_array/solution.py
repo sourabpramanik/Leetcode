@@ -8,13 +8,13 @@ class Solution:
         e=len(nums)-1
         while(s<=e):
             mid=s+(e-s)//2
-            
+            if(nums[mid]==target):
+                ans[1]=mid
             if(nums[mid]<=target):
                 s=mid+1
             else:
                 e=mid-1
-            if(nums[mid]==target):
-                ans[1]=mid
+            
         
         s=0
         e=len(nums)-1
@@ -22,15 +22,15 @@ class Solution:
         while(s<=e):
             mid=s+(e-s)//2
             
+            if(nums[mid]==target):
+                ans[0]=mid
             if(nums[mid]<target):
                 s=mid+1
             else:
                 e=mid-1
             
-            if(nums[mid]==target):
-                ans[0]=mid
+            
                 
                 
         
         return ans
-                
