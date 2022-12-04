@@ -9,10 +9,10 @@ class Solution:
         p=headA
         q=headB
         
-        while p!=q:
+        while p != q:                                    
             
             if not p:
-                p=headB
+                p=headB 
             else:
                 p=p.next
             
@@ -20,5 +20,6 @@ class Solution:
                 q=headA
             else:
                 q=q.next
+            
         
         return p
