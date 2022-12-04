@@ -4,14 +4,13 @@ class Solution:
         n=len(s)
         i=0
         j=0
-        ds=set()
+        ds={}
         while j<n:
-            if s[j] in ds:
-                ds.remove(s[i])
-                i+=1
-            else:
-                ans=max(ans, j-i+1)
-                ds.add(s[j])
-                j+=1
+            if s[j] in ds:                
+                i=max(i, ds[s[j]]+1)
+            
+            ans=max(ans, j-i+1)
+            ds[s[j]] = j
+            j+=1
         
         return ans
