@@ -12,31 +12,30 @@ class Solution:
         if not head:
             return head
         
-        node=head
         
-        while node:
-            tmp=node.next
-            node.next = Node(node.val)
-            node.next.next=tmp
-            node = node.next.next
+        cur=head
+        while cur:
+            tmp=cur.next
+            cur.next = Node(cur.val)
+            cur.next.next=tmp
+            cur=cur.next.next
         
-        node=head
+        cur=head
+        while cur:            
+            if cur.random:
+                cur.next.random = cur.random.next
+            cur=cur.next.next
         
-        while node:
-            if node.random:
-                node.next.random = node.random.next
-            node=node.next.next
-        
-        prime=Node(0)
-        p=prime
-        node=head
-        while node:
-            front = node.next.next
-            p.next = node.next
-            node.next = front
-            node = node.next
+        ans=Node(0)
+        p=ans
+        cur=head
+        while cur:
+            front=cur.next.next
+            p.next=cur.next
+            cur.next=front
+            cur = cur.next
             p=p.next
         
-        return prime.next
+        return ans.next
         
-                
+        
