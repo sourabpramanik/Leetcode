@@ -2,18 +2,23 @@ class Solution:
     def trap(self, H: List[int]) -> int:
         n=len(H)
         ans=0
-        pre=[0]*n
-        suf=[0]*n
-        pre[0]=H[0]
-        suf[-1]=H[-1]
+        leftMax=0
+        rightMax=0
+        l=0
+        r=n-1
         
-        for i in range(1, n):
-            pre[i]=max(pre[i-1], H[i])
-        
-        for i in range(n-2, -1, -1):
-            suf[i]=max(suf[i+1], H[i])
-        
-        for i in range(0, n):
-            ans+=min(pre[i], suf[i])-H[i]
+        while l<=r:
+            if H[l]<=H[r]:
+                if leftMax < H[l]:
+                    leftMax=H[l]
+                else:
+                    ans+=leftMax-H[l]
+                l+=1
+            else:
+                if rightMax < H[r]:
+                    rightMax=H[r]
+                else:
+                    ans+=rightMax-H[r]
+                r-=1
         return ans
             
