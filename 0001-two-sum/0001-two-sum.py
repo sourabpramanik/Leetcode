@@ -2,14 +2,34 @@ class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         
         n=len(nums)
-        ds={}
+        arr=[]
         for i in range(0, n):
-            val = target-nums[i]
-            if val in ds:
-                return [ds[val], i]
-            else:
-                ds[nums[i]] = i
+            arr.append(nums[i])
+        arr.sort()
         
-        return[-1, -1]
+        l=0
+        r=n-1
+        
+        n1=0
+        n2=0
+        
+        while l<r:
+            if arr[l]+arr[r]==target:
+                n1=arr[l]
+                n2=arr[r]
+                break
+            elif arr[l]+arr[r]>target:
+                r-=1
+            else:
+                l+=1
+                
+        ans=[]
+        for i in range(0, n):
+            if nums[i]==n1:                
+                ans.append(i)
+            elif nums[i]==n2:                
+                ans.append(i)
+        return ans
+        
         
         
