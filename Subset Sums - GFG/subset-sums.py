@@ -3,24 +3,17 @@ class Solution:
 	def subsetSums(self, arr, N):
 		# code here
         ans=[]
-        def rec(i, ds):
+        def rec(i, val):
             
             if i>=N:
-                val=0
-                for v in ds:
-                    val+=v
                 ans.append(val)
                 return
             
-            ds.append(arr[i])
-            rec(i+1, ds)
-            ds.pop()
-            rec(i+1, ds)
+            rec(i+1, val+arr[i])
+            rec(i+1, val)
         
-        rec(0, [])
-        
+        rec(0, 0)
         return ans
-
 #{ 
  # Driver Code Starts
 #Initial Template for Python 3
