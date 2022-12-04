@@ -9,14 +9,17 @@ class Solution:
         p=headA
         q=headB
         
-        hashMap={}
-        while p:
-            hashMap[p]=1
-            p=p.next
+        while p != q:                                    
+            
+            if not p:
+                p=headB 
+            else:
+                p=p.next
+            
+            if not q:
+                q=headA
+            else:
+                q=q.next
+            
         
-        while q:
-            if q in hashMap:
-                return q
-            q=q.next
-        
-        return None
+        return p
