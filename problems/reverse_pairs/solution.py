@@ -1,47 +1,52 @@
 class Solution:
     def reversePairs(self, nums: List[int]) -> int:
-        count=0
+        
+        
         return self.divide(nums, 0, len(nums)-1)
     
-    def divide(self, nums, l, r):
-        count=0
-        if l<r:
-            mid=(l+r)//2
-            count+= self.divide(nums, l, mid)            
-            count+= self.divide(nums, mid+1, r)
-            count+= self.merge(nums, l, mid, r)
-        
+    def divide(self,arr, l, r):
+        if l>=r: return 0
+        mid=(l+r)//2
+        count = self.divide(arr, l, mid)
+        count += self.divide(arr, mid+1, r)
+        count += self.merge(arr, l, mid, r)
         return count
     
-    def merge(self, nums, l, mid, r):
-        ds=[]
+    def merge(self, arr, low, mid, high):
         count=0
-        j=mid+1        
-        for i in range(l, mid+1):
-            while j<=r and nums[i]>2*nums[j]:
+        j=mid+1
+        ds=[]
+        for i in range(low, mid+1):
+            while j<=high and arr[i]>2*arr[j]:
                 j+=1
-            count+=(j-(mid+1))
             
-        i=l
+            count+=j-(mid+1)
+        
+        i=low
         j=mid+1
         
-        while i<=mid and j<=r:
-            if nums[i]<=nums[j]:
-                ds.append(nums[i])
+        while i<=mid and j<=high:
+            if arr[i]<=arr[j]:
+                ds.append(arr[i])
                 i+=1
             else:
-                ds.append(nums[j])
+                ds.append(arr[j])
                 j+=1
         
         while i<=mid:
-            ds.append(nums[i])
+            ds.append(arr[i])
             i+=1
         
-        while j<=r:
-            ds.append(nums[j])
+        while j<=high:
+            ds.append(arr[j])
             j+=1
-            
-        for i in range(l, r+1):
-            nums[i]=ds[i-l]
+        
+        for i in range(low, high+1):
+            arr[i] = ds[i-low]
         
         return count
+        
+        
+            
+        
+        
