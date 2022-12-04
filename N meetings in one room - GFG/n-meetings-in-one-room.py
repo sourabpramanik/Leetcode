@@ -6,23 +6,26 @@ class Solution:
     #be performed in a meeting room.
     def maximumMeetings(self,n,start,end):
         # code here
-        vector=[]
-        for i in range(0, len(start)):
-            vector.append((start[i], end[i], i+1))
+        ans=1
+        arr=[]
+        for i in range(0, n):
+            arr.append((start[i], end[i], i+1))
         
-        vector.sort(key=lambda x:(x[1], x[2]))
+        arr.sort(key=lambda x:(x[1], x[2]))
         
-        count=1
-        preStart=vector[0][0]    
-        preEnd=vector[0][1]
+        preStart=arr[0][0]
+        preEnd=arr[0][1]
+        for i in range(1, n):
+            curStart=arr[i][0]
+            curEnd=arr[i][1]
+            
+            if curStart>preEnd:
+                ans+=1
+                preStart=curStart
+                preEnd=curEnd
         
-        for i in range(1, len(vector)):
-            if vector[i][0]>preEnd:
-                count+=1
-                preStart=vector[i][0]    
-                preEnd=vector[i][1]
-        return count
-    
+        return ans
+            
 
 
 #{ 
