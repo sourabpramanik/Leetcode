@@ -1,26 +1,22 @@
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
-        ans=""
-        
         fact=1
-        nums = []
+        arr=[]
+        ans=""
         for i in range(1, n):
-            fact *= i
-            nums.append(i)
-        
-        nums.append(n)
-        k-=1
-        
+            fact*=i
+            arr.append(i)
+        arr.append(n)
+        k=k-1
+
         while True:
-            
-            ans = ans + str(nums[k//fact])
-            nums.pop(k//fact)
-            
-            if len(nums)==0:
+            id=k//fact
+            ans+=str(arr[id])
+            arr.pop(id)
+            if len(arr)==0:
                 break
-                
             k=k%fact
-            fact=fact//len(nums)
+            fact//=len(arr)
+            
         
         return ans
-            
