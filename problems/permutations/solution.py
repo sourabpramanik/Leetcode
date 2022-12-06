@@ -1,16 +1,16 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
+        n=len(nums)        
         ans=[]
-        n=len(nums)
-        def rec(i, ds):
+        def rec(i):
             if i>=n:
-                ans.append(ds[:])
+                ans.append(nums[:])
                 return
             
             for j in range(i, n):
-                ds[i], ds[j] = ds[j], ds[i]
-                rec(i+1, ds)
-                ds[i], ds[j] = ds[j], ds[i]
-                
-        rec(0, nums)
+                nums[i], nums[j] = nums[j], nums[i]
+                rec(i+1)
+                nums[i], nums[j] = nums[j], nums[i]
+
+        rec(0)
         return ans
