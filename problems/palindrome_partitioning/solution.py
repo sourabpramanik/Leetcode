@@ -2,19 +2,23 @@ class Solution:
     def partition(self, s: str) -> List[List[str]]:
         ans=[]
         n=len(s)
-        def rec(i, ds, s):
+        def rec(i, ds):
             if i>=n:
                 ans.append(ds[:])
                 return
             
             for j in range(i, n):
-                if self.check(i,j,s):
+                if self.pal(s, i, j):
                     ds.append(s[i:j+1])
-                    rec(j+1, ds, s)
-                    ds.pop(len(ds)-1)
-        rec(0, [], s)
+                    rec(j+1, ds)
+                    ds.pop()
+        
+        rec(0, [])
         return ans
-    def check(self, l, r, s):
+    
+    def pal(self, s, i, j):
+        l=i
+        r=j
         while l<=r:
             if s[l]!=s[r]:
                 return False
