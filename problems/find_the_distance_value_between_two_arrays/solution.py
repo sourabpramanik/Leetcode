@@ -19,3 +19,4 @@ class Solution:
                     i += 1
         dist += len(arr1) - i
         return dist
+
