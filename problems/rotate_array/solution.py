@@ -3,17 +3,23 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        k %= len(nums)
         
-        self.reverse(nums, 0, len(nums)-1)
-        self.reverse(nums, 0, k-1)
-        self.reverse(nums, k, len(nums)-1)
+        n=len(nums)
+        k=k%n
+
+        self.reverse(0, n-1, nums)
+        self.reverse(0, k-1, nums)
+        self.reverse(k, n-1, nums)
+    
+    def reverse(self, left, right, nums):
+        while left<=right:
+            nums[left], nums[right]=nums[right], nums[left]
+            left+=1
+            right-=1
         
-    def reverse(self, arr, s, e):
-        while(s<e):
-            t = arr[s]
-            arr[s] = arr[e]
-            arr[e] = t
-            s+=1
-            e-=1
+        return nums
+
+        
+        
+        
         
