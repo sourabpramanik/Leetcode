@@ -1,36 +1,12 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        ans=[-1, -1]    
+        first=-1
+        last=-1
+        for i, n in enumerate(nums):
+            if n==target:
+                if first==-1:
+                    first=i
+                if first!=-1:
+                    last=i
         
-        if(len(nums)<1): return ans
-        
-        s=0
-        e=len(nums)-1
-        while(s<=e):
-            mid=s+(e-s)//2
-            if(nums[mid]==target):
-                ans[1]=mid
-            if(nums[mid]<=target):
-                s=mid+1
-            else:
-                e=mid-1
-            
-        
-        s=0
-        e=len(nums)-1
-        
-        while(s<=e):
-            mid=s+(e-s)//2
-            
-            if(nums[mid]==target):
-                ans[0]=mid
-            if(nums[mid]<target):
-                s=mid+1
-            else:
-                e=mid-1
-            
-            
-                
-                
-        
-        return ans
+        return [first, last]
