@@ -12,14 +12,30 @@ class Solution:
         :return:  The union of both arrays as a list
         '''
         # code here 
-        ds={}
-        for val in a:
-            ds[val]=1
+        ans=[]
+        i=0
+        j=0
+        while i<n and j<m:
+            if a[i]<=b[j]:
+                if len(ans)==0 or ans[-1]!=a[i]:
+                    ans.append(a[i])
+                i+=1
+            else:
+                if len(ans)==0 or ans[-1]!=b[j]:
+                    ans.append(b[j])
+                j+=1
         
-        for val in b:
-            ds[val]=1
+        while i<n:
+            if len(ans)==0 or ans[-1]!=a[i]:
+                ans.append(a[i])
+            i+=1
         
-        return sorted(ds.keys())
+        while j<m:
+            if len(ans)==0 or ans[-1]!=b[j]:
+                ans.append(b[j])
+            j+=1
+            
+        return ans
 
 #{ 
  # Driver Code Starts
