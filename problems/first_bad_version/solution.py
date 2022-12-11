@@ -5,13 +5,12 @@ class Solution:
     def firstBadVersion(self, n: int) -> int:
         l=1
         h=n
-        
+
         while l<=h:
-            mid = (l+h)//2
-            
-            if isBadVersion(mid)==False:
-                l=mid+1
-            else:
+            mid=(l+h)>>1
+            if isBadVersion(mid):
                 h=mid-1
-        
-        return l
+            else:
+                l=mid+1
+
+        return l            
