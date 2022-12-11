@@ -12,16 +12,14 @@ class Solution:
         :return:  The union of both arrays as a list
         '''
         # code here 
-        ans=set()
-        
+        ds={}
         for val in a:
-            ans.add(val)
+            ds[val]=1
         
         for val in b:
-            ans.add(val)
+            ds[val]=1
         
-        return sorted(ans)
-
+        return sorted(ds.keys())
 
 #{ 
  # Driver Code Starts
