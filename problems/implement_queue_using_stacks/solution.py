@@ -5,22 +5,23 @@ class MyQueue:
         self.s2=[]
 
     def push(self, x: int) -> None:
-        while self.s1:
-            self.s2.append(self.s1.pop())
         self.s1.append(x)
-        while self.s2:
-            self.s1.append(self.s2.pop())
 
     def pop(self) -> int:
-        return self.s1.pop()
+        self.peek()
+        return self.s2.pop()
+        
 
     def peek(self) -> int:
-        return self.s1[-1]
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1]
 
     def empty(self) -> bool:
-        if len(self.s1)==0:
-            return True
-        return False
+        if len(self.s1)+len(self.s2)>0:
+            return False
+        return True
 
 
 # Your MyQueue object will be instantiated and called as such:
