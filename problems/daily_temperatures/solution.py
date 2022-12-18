@@ -1,13 +1,15 @@
 class Solution:
-    def dailyTemperatures(self, temp: List[int]) -> List[int]:
-        stack = []
-        ans = [0]*len(temp)
-        
-        for i, t in enumerate(temp):
-            while stack and temp[stack[-1]]<t:
-                cur = stack.pop()
-                ans[cur] = i-cur
+    def dailyTemperatures(self, temps: List[int]) -> List[int]:
+        st=[]
+        n=len(temps)
+
+        arr=[0]*n
+
+        for i in range(0, n):
+            while st and temps[st[-1]]<temps[i]:
+                cur = st.pop()
+                arr[cur] = i-cur
             
-            stack.append(i)
-        
-        return ans
+            st.append(i)
+
+        return arr
