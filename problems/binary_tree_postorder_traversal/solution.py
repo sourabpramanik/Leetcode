@@ -4,20 +4,25 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        stack = [root]
-        ans = []
-       
-        while stack:
-            temp = stack.pop()
-            
-            if temp:
-                if isinstance(temp, TreeNode):
-                    stack.append(temp.val)
-                    stack.append(temp.right)
-                    stack.append(temp.left)
+        arr=[]
+        stack=[]
+        cur=root
+
+        while cur or stack:
+            if cur:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                temp=stack[-1].right
+                if not temp:
+                    temp=stack.pop()
+                    arr.append(temp.val)
+                    while stack and temp==stack[-1].right:
+                        temp=stack.pop()
+                        arr.append(temp.val)
                 else:
-                    ans.append(temp)
-        return ans
+                    cur=temp                    
+        
+        return arr
