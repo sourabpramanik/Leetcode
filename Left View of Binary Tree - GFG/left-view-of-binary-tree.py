@@ -16,22 +16,20 @@ def LeftView(root):
     # code here
     if not root:
         return []
-    
-    queue = deque([root])
-    arr=[]
-    while queue:
-        temp=[]
-        for _ in range(0, len(queue)):
-            node = queue.popleft()
-            if len(temp)==0:
-                temp.append(node.data)
+   
+    ans=[]
+    def dfs(node, level):
+        if not node:
+            return
+        
+        if len(ans)==level:
+            ans.append(node.data)
             
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-        arr.append(temp.pop())
-    return arr
+        dfs(node.left, level+1)
+        dfs(node.right, level+1)
+        
+    dfs(root, 0)
+    return ans
 
 
 #{ 
