@@ -4,30 +4,48 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque
 class Solution:
-    def rec(self, X, Y, node, obj):
-        
-        if not node: return None
-        obj[X].append((Y, node.val))
-        
-        self.rec(X-1, Y+1, node.left, obj)
-        self.rec(X+1, Y+1, node.right, obj)
-        
-    def verticalTraversal(self, root):
-        
-        obj = defaultdict(list) 
-        self.rec(0,0,root,obj)
-        
-        res=[]
-        
-        for i in sorted(obj.keys()):
-            temp=[]            
-            for j in sorted(obj[i]):
-                temp.append(j[1])
-            res.append(temp)
-        
-        return res
-        
-            
-            
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+
+        M=dict()
+        stack=[]
+        node=root
+        v=0
+        l=0
+        while True:
+            if node:
+                stack.append((node, v, l))
+                node=node.left
+                v-=1
+                l+=1
+            else:
+                if not stack:
+                    break
+                
+                node, v, l = stack.pop()
+                if not v in M:
+                    M[v] = dict()
+
+                if not l in M[v]:
+                        M[v][l] = list()
+                
+                M[v][l].append(node.val)
+                
+                if len(M[v][l])>1:
+                    M[v][l].sort()
+
+                node = node.right
+                v+=1
+                l+=1
+                
+        ans=[]
+        for key in sorted(M):
+            obj = M[key]
+            val = []
+            for key in sorted(obj):
+                arr=obj[key]
+                val+=arr
+           
+            ans.append(val)
+
+        return ans
