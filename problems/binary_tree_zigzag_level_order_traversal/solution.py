@@ -5,28 +5,25 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:        
-        ans = []
+    def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         if not root:
-            return ans
-        que = collections.deque([root])
-        odd = False
-        while que:
-            ds = []
-            for _ in range(len(que)):
-                node = que.popleft()
-                ds.append(node.val)
-                if node.left:
-                    que.append(node.left)
-                
-                if node.right:
-                    que.append(node.right)
-            if odd:
-                ans.append(ds[::-1])
-                odd = False
-            else:
-                ans.append(ds)
-                odd = True
-                
-        
+            return []
+        queue=collections.deque([root])
+        level=1
+        ans=[]
+        while queue:
+            size=len(queue)
+            temp=[0]*size
+            for i in range(0, size):
+                node = queue.popleft()
+                index = i if level%2 else size-i-1
+                if node:
+                    temp[index] = node.val
+                    if node.left:
+                        queue.append(node.left)
+                    if node.right:
+                        queue.append(node.right)
+
+            ans.append(temp)
+            level^=1
         return ans
