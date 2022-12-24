@@ -3,21 +3,20 @@
 class Solution:
     def maxLen(self, n, arr):
         #Code here
-        ans=0
-        store={}
-        preSum=0
+        maxSub=0
+        target=0
+        hashes={}
+        
         for i in range(0, n):
-            preSum+=arr[i]
-            if preSum==0:
-                ans=i+1
+            target+=arr[i]
+            if target==0:
+                maxSub=i+1
             else:
-                if preSum in store:
-                    ans=max(ans, i-store[preSum])
+                if target in hashes:
+                    maxSub = max(maxSub, i-hashes[target])
                 else:
-                    store[preSum] = i
-        return ans
-                    
-
+                    hashes[target] = i
+        return maxSub
 #{ 
  # Driver Code Starts
 if __name__=='__main__':
