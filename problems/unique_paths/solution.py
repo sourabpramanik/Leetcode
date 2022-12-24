@@ -3,9 +3,8 @@ class Solution:
         N=m+n-2
         r=m-1
         ans=1
-        
         for i in range(1, r+1):
-            ans *= N-r+i
-            ans //= i
+            ans*=N-r+i
+            ans//=i
         
         return ans
