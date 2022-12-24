@@ -5,15 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def rec(self, p: Optional[TreeNode], q: Optional[TreeNode]):
-        if (not p and not q):
-            return (p==q)
-        if(p and q and p.val==q.val):
-            return self.rec(p.left,q.right) and self.rec(p.right,q.left)
-        return False
-    
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
-       
-        return self.rec(root, root)
-    
-    
+        def dfs(node1, node2):
+            if not node1 or not node2:
+                return node1==node2
+            
+            if node1.val!=node2.val:
+                return False
+            
+            l = dfs(node1.left, node2.right)
+            r = dfs(node1.right, node2.left)
+
+            if l and r:
+                return True
+            return False
+        return dfs(root.left, root.right)
