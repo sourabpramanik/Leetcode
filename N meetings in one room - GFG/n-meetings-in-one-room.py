@@ -6,26 +6,26 @@ class Solution:
     #be performed in a meeting room.
     def maximumMeetings(self,n,start,end):
         # code here
-        ans=1
         arr=[]
         for i in range(0, n):
-            arr.append((start[i], end[i], i+1))
+            arr.append([start[i], end[i], i+1])
         
-        arr.sort(key=lambda x:(x[1], x[2]))
+        arr.sort(key=lambda x: (x[1], x[2]))
         
         preStart=arr[0][0]
         preEnd=arr[0][1]
+        ans=1
         for i in range(1, n):
-            curStart=arr[i][0]
-            curEnd=arr[i][1]
+            currStart=arr[i][0]
+            currEnd=arr[i][1]
             
-            if curStart>preEnd:
+            if preEnd<currStart:
                 ans+=1
-                preStart=curStart
-                preEnd=curEnd
+                preStart=currStart
+                preEnd=currEnd
+            
         
         return ans
-            
 
 
 #{ 
