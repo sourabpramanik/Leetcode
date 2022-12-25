@@ -17,43 +17,34 @@ def flatten(root):
         return root
     
     flatten(root.next)
-    
     return merge(root, root.next)
 
-def merge(left, right):
-    if not left:
-        return right
-    if not right:
-        return left
-        
-    l1=left
-    l2=right
+def merge(head1,head2):
+    l1=head1
+    l2=head2
+    
     res=Node(0)
-    tmp=res
+    p=res
+    
     while l1 and l2:
-        
-        if l1.data<=l2.data:
-            tmp.bottom = l1
-            tmp = tmp.bottom
+        if l1.data <=l2.data:
+            p.bottom=l1
+            p=p.bottom
             l1=l1.bottom
         else:
-            tmp.bottom = l2
-            tmp = tmp.bottom
+            p.bottom=l2
+            p=p.bottom
             l2=l2.bottom
-        
-        
     
     if l1:
-        tmp.bottom=l1
+        p.bottom=l1
+        p=p.bottom
     
     if l2:
-        tmp.bottom=l2
-        
-        
+        p.bottom=l2
+        p=p.bottom
+    
     return res.bottom
-    
-    
-
 
 #{ 
  # Driver Code Starts
