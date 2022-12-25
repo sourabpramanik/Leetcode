@@ -1,25 +1,27 @@
 class Solution:
-    def combinationSum2(self, A: List[int], target: int) -> List[List[int]]:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         ans=[]
-        n=len(A)
-        A.sort()
-        def rec(i, ds, target):
-            if target==0:
-                ans.append(ds[:])
-                return
-            
-            if i>=n:
-                return
-
-            for j in range(i, n):
-                if target<A[j]:
-                    break
-                if j>i and A[j]==A[j-1]:
-                    continue
-                ds.append(A[j])
-                rec(j+1, ds, target-A[j])
-                ds.pop()                
-            
-        
-        rec(0, [], target)
+        candidates.sort()
+        self.rec(0, [], candidates, target, len(candidates), ans)
         return ans
+    
+    def rec(self, i, ds, candidates, target, N, ans):
+        if target==0:
+            ans.append(ds[:])
+            return 
+        
+        if i>=N:
+            return
+        
+        if target>=candidates[i]:
+            for j in range(i, N):
+                if target<candidates[j]:
+                    break
+                if j>i and candidates[j]==candidates[j-1]:
+                    continue
+
+                ds.append(candidates[j])
+                target-=candidates[j]
+                self.rec(j+1, ds, candidates, target, N, ans)
+                target+=candidates[j]
+                ds.pop()
