@@ -1,20 +1,20 @@
 class Solution:
-    def combinationSum(self, A: List[int], target: int) -> List[List[int]]:
-        n=len(A)
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         ans=[]
-        def rec(id, ds, targetSum):
-            if targetSum==0:
-                ans.append(ds[:])
-                return
+        self.rec(0, [], candidates, target, len(candidates), ans)
+        return ans
+    
+    def rec(self, i, ds, C, target, N, ans):
+        if target==0:
+            ans.append(ds[:])
+            return
 
-            if id>=n:
-                return                         
-            
-            if targetSum>=A[id]:
-                ds.append(A[id])
-                rec(id, ds, targetSum-A[id])
-                ds.pop()
-            rec(id+1, ds, targetSum)
+        if i>=N:
+            return
 
-        rec(0, [], target)
-        return ans            
+        if target>=C[i]:
+            ds.append(C[i])
+            self.rec(i, ds, C, target-C[i], N, ans)
+            ds.pop()
+        self.rec(i+1, ds, C, target, N, ans)
+        
