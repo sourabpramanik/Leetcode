@@ -9,17 +9,9 @@ class Solution:
         p=headA
         q=headB
         
-        while p != q:                                    
+        while p!=q:
             
-            if not p:
-                p=headB 
-            else:
-                p=p.next
-            
-            if not q:
-                q=headA
-            else:
-                q=q.next
-            
+            p=headB if p==None else p.next
+            q=headA if q==None else q.next
         
         return p
