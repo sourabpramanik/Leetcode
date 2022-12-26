@@ -9,6 +9,5 @@ class Solution:
             if i<n:
                 if stack:
                     ans[i]=stack[-1]
-            
             stack.append(nums[i%n])
         return ans
