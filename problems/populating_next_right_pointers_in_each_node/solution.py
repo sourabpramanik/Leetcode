@@ -10,21 +10,20 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        
-        if not root:
-            return root
-        queue = collections.deque([root])
-        
+        queue=collections.deque([root])
+
         while queue:
-            prev = None
-            for _ in range(len(queue)):
-                node = queue.popleft()
-                if prev:
-                    prev.next = node
-                prev = node
-                if node.left:
-                    queue.append(node.left)
-                if node.right:
-                    queue.append(node.right)
-        
-        return root
+            prev=None
+            size=len(queue)
+            for _ in range(0, size):
+                node=queue.popleft()
+                if node:
+                    if prev:
+                        prev.next = node
+                    if node.left:
+                        queue.append(node.left)
+                    if node.right:
+                        queue.append(node.right)
+                    prev=node
+
+        return root 
