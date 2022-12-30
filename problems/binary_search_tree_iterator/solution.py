@@ -5,25 +5,28 @@
 #         self.left = left
 #         self.right = right
 class BSTIterator:
-    
-    def __init__(self, root):
-        self.stack = list()
-        self.pushNode(root)
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.stack=[]
+        self.addNodes(root)
 
     def next(self) -> int:
-        node = self.stack.pop()
-        self.pushNode(node.right)
-        return node.val
+        ans=None
+        cur=self.stack.pop()
+        ans=cur.val
+        self.addNodes(cur.right)
+        return ans
 
     def hasNext(self) -> bool:
-        return len(self.stack)
+        if len(self.stack):
+            return True
+        return False
     
-    def pushNode(self,node):
-        if node is None: return None
-        
+    def addNodes(self, node):
         while node:
             self.stack.append(node)
-            node = node.left
+            node=node.left
+        
 
 
 # Your BSTIterator object will be instantiated and called as such:
