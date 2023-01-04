@@ -6,46 +6,29 @@
 #         self.right = right
 class Solution:
     def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
-
-        M=dict()
-        stack=[]
-        node=root
-        v=0
-        l=0
-        while True:
-            if node:
-                stack.append((node, v, l))
-                node=node.left
-                v-=1
-                l+=1
-            else:
-                if not stack:
-                    break
-                
-                node, v, l = stack.pop()
-                if not v in M:
-                    M[v] = dict()
-
-                if not l in M[v]:
-                        M[v][l] = list()
-                
-                M[v][l].append(node.val)
-                
-                if len(M[v][l])>1:
-                    M[v][l].sort()
-
-                node = node.right
-                v+=1
-                l+=1
-                
+        store = dict()
+        queue=collections.deque([(root, 0, 0)])
+        while queue:
+            size=len(queue)
+            while size:
+                node, ver, lev = queue.popleft()
+                if node:
+                    if not ver in store:
+                        store[ver] = dict()
+                    if not lev in store[ver]:
+                        store[ver][lev]=list()
+                    store[ver][lev].append(node.val)
+                    store[ver][lev].sort()
+                    if node.left:
+                        queue.append((node.left, ver-1, lev+1))
+                    if node.right:
+                        queue.append((node.right, ver+1, lev+1))
+                size-=1
+        
         ans=[]
-        for key in sorted(M):
-            obj = M[key]
-            val = []
-            for key in sorted(obj):
-                arr=obj[key]
-                val+=arr
-           
-            ans.append(val)
-
+        for key in sorted(store):
+            temp=[]
+            for arr in store[key].values():
+                temp+=arr
+            ans.append(temp[:])
         return ans
