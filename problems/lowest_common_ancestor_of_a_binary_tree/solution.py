@@ -7,20 +7,33 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        arr1=[]
+        arr2=[]
+
+        self.dfs(root, arr1, p)
+        self.dfs(root, arr2, q)
+
+        i=0
+        j=0
+        while i<len(arr1) and j<len(arr2):
+            if arr1[i].val!=arr2[j].val:
+                break
+            i+=1
+            j+=1
         
-        def dfs(node):
-            if not node:
-                return None
-            if node==p or node==q:
-                return node 
-            l=dfs(node.left)
-            r=dfs(node.right)
-            if l and r:
-                return node
-            if not l:
-                return r
-            return l
-            
-        return dfs(root)
+        return arr1[i-1]
+
+    def dfs(self, node, arr, target):
+        if not node:
+            return
         
-        return
+        arr.append(node)
+        if node.val==target.val:
+            return True
+        l=self.dfs(node.left, arr,target)
+        r=self.dfs(node.right, arr, target)
+
+        if l or r:
+            return True
+        arr.pop()
+        return False
