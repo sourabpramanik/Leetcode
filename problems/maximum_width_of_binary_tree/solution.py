@@ -7,24 +7,24 @@
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         queue=collections.deque([(root, 0)])
-        maxW=0
+        ans=0
         while queue:
-            mini=queue[0][1]
-            first=0 
-            last=0
             size=len(queue)
+            curMin=queue[0][1]
+            first=0
+            last=0
             for i in range(0, size):
                 node, ind = queue.popleft()
-                ind = ind-mini
+                ind=ind-curMin
                 if i==0:
                     first=ind
                 if i==size-1:
                     last=ind
-                                
+                
                 if node.left:
-                    queue.append((node.left, ind*2+1))
+                    queue.append((node.left, 2*ind+1))
                 if node.right:
-                    queue.append((node.right, ind*2+2))
-            maxW=max(maxW, last-first+1)
+                    queue.append((node.right, 2*ind+2))
+            ans=max(ans, last-first+1)
         
-        return maxW
+        return ans
