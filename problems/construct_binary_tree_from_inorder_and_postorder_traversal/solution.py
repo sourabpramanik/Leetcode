@@ -6,19 +6,21 @@
 #         self.right = right
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        nodes = dict()
+        store={}
         for i in range(0, len(inorder)):
-            nodes[inorder[i]] = i
-        return self.build(nodes, postorder, 0, len(postorder)-1, inorder, 0, len(inorder)-1)
-    
-    def build(self, nodes, postorder, posStart, posEnd, inorder, iStart, iEnd):
-        if posStart>posEnd or iStart>iEnd:
-            return None
+            store[inorder[i]] = i
         
-        val=postorder[posEnd]
-        x=nodes[val]
-        nEle=x-iStart
+        return self.build(postorder, 0, len(postorder)-1, inorder, 0, len(inorder)-1, store)
+
+    def build(self, postorder, pos, poe, inorder, ins, ine, store):
+        if pos>poe or ins>ine:
+            return None
+
+        val=postorder[poe]
+        x=store[val]
+        numLeft=x-ins
+
         root=TreeNode(val)
-        root.left= self.build(nodes, postorder, posStart, posStart+nEle-1, inorder, iStart, x-1)
-        root.right= self.build(nodes, postorder, posStart+nEle, posEnd-1, inorder, x+1, iEnd)
+        root.left=self.build(postorder, pos, pos+numLeft-1, inorder, ins, x-1, store)
+        root.right=self.build(postorder, pos+numLeft, poe-1, inorder, x+1, ine, store)
         return root
